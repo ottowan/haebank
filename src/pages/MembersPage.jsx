@@ -61,9 +61,12 @@ export default function MembersPage() {
     }, []);
 
     const loadMembers = async () => {
+
+        console.log('Call memberService.getAllMembers()');
         try {
             setLoading(true);
             const data = await getAllMembers();
+            console.log('MembersPage: Fetched members:', data);
             setMembers(data);
         } catch (error) {
             toast({

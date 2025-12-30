@@ -63,6 +63,8 @@ export default function MemberDetailPage() {
                 getPaymentsByMember(id)
             ]);
 
+            console.log('MemberDetailPage: Fetched data', { memberData, contractsData, paymentsData });
+
             setMember(memberData);
             setContracts(contractsData || []);
             setPayments(paymentsData || []);
