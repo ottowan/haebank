@@ -1,4 +1,4 @@
-import { Box, VStack, Icon, Text, Flex, useColorModeValue } from '@chakra-ui/react'
+import { Box, VStack, Icon, Text, Flex, useColorModeValue, CloseButton } from '@chakra-ui/react'
 import { NavLink } from 'react-router-dom'
 import {
     FiHome,
@@ -7,13 +7,13 @@ import {
     FiDollarSign
 } from 'react-icons/fi'
 
-const NavItem = ({ icon, children, to }) => {
+const NavItem = ({ icon, children, to, onClose }) => {
     const activeBg = useColorModeValue('brand.50', 'brand.900')
     const activeColor = useColorModeValue('brand.600', 'brand.200')
     const hoverBg = useColorModeValue('gray.100', 'gray.700')
 
     return (
-        <NavLink to={to} style={{ width: '100%' }}>
+        <NavLink to={to} style={{ width: '100%' }} onClick={onClose}>
             {({ isActive }) => (
                 <Flex
                     align="center"
@@ -44,33 +44,45 @@ const NavItem = ({ icon, children, to }) => {
     )
 }
 
-export default function Sidebar() {
-    const bg = useColorModeValue('white', 'gray.900')
-    const borderColor = useColorModeValue('gray.200', 'gray.700')
-
+export const SidebarContent = ({ onClose, ...rest }) => {
     return (
         <Box
-            bg={bg}
+            bg={useColorModeValue('white', 'gray.900')}
             borderRight="1px"
-            borderRightColor={borderColor}
+            borderRightColor={useColorModeValue('gray.200', 'gray.700')}
             w={{ base: 'full', md: 60 }}
+            pos="fixed"
             h="full"
-            display={{ base: 'none', md: 'block' }}
+            {...rest}
         >
+            <Flex h="20" alignItems="center" mx="8" justifyContent="space-between" display={{ base: 'flex', md: 'none' }}>
+                <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+                    Loan System
+                </Text>
+                <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
+            </Flex>
             <VStack spacing={1} align="stretch" mt={4}>
-                <NavItem icon={FiHome} to="/">
+                <NavItem icon={FiHome} to="/" onClose={onClose}>
                     หน้าหลัก
                 </NavItem>
-                <NavItem icon={FiUsers} to="/members">
+                <NavItem icon={FiUsers} to="/members" onClose={onClose}>
                     สมาชิก
                 </NavItem>
-                <NavItem icon={FiFileText} to="/contracts">
+                <NavItem icon={FiFileText} to="/contracts" onClose={onClose}>
                     สัญญาเงินกู้
                 </NavItem>
-                <NavItem icon={FiDollarSign} to="/payments">
+                <NavItem icon={FiDollarSign} to="/payments" onClose={onClose}>
                     การชำระเงิน
                 </NavItem>
             </VStack>
+        </Box>
+    )
+}
+
+export default function Sidebar() {
+    return (
+        <Box display={{ base: 'none', md: 'block' }}>
+            <SidebarContent />
         </Box>
     )
 }

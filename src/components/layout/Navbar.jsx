@@ -14,11 +14,11 @@ import {
     Text,
     useToast,
 } from '@chakra-ui/react'
-import { FiBell, FiChevronDown } from 'react-icons/fi'
+import { FiBell, FiChevronDown, FiMenu } from 'react-icons/fi'
 import { useAuth } from '../../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
 
-export default function Navbar() {
+export default function Navbar({ onOpen }) {
     const { user, signOut } = useAuth()
     const navigate = useNavigate()
     const toast = useToast()
@@ -46,6 +46,15 @@ export default function Navbar() {
             borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
         >
             <Flex h={16} alignItems="center" justifyContent="space-between">
+                <IconButton
+                    display={{ base: 'flex', md: 'none' }}
+                    onClick={onOpen}
+                    variant="outline"
+                    aria-label="open menu"
+                    icon={<FiMenu />}
+                    mr={4}
+                />
+
                 <Text fontSize="xl" fontWeight="bold" color="brand.600">
                     ระบบลูกหนี้เงินกู้
                 </Text>
