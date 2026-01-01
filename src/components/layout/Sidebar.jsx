@@ -54,9 +54,9 @@ export const SidebarContent = ({ onClose, ...rest }) => {
             h="full"
             {...rest}
         >
-            <Flex h="20" alignItems="center" mx="8" justifyContent="space-between" display={{ base: 'flex', md: 'none' }}>
-                <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-                    Loan System
+            <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
+                <Text fontSize="lg" fontWeight="bold" color={useColorModeValue('brand.600', 'white')}>
+                    ระบบลูกหนี้เงินกู้
                 </Text>
                 <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
             </Flex>

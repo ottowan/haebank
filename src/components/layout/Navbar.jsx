@@ -13,13 +13,15 @@ import {
     useColorModeValue,
     Text,
     useToast,
+    useColorMode,
 } from '@chakra-ui/react'
-import { FiBell, FiChevronDown, FiMenu } from 'react-icons/fi'
+import { FiBell, FiChevronDown, FiMenu, FiMoon, FiSun } from 'react-icons/fi'
 import { useAuth } from '../../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
 
 export default function Navbar({ onOpen }) {
     const { user, signOut } = useAuth()
+    const { colorMode, toggleColorMode } = useColorMode()
     const navigate = useNavigate()
     const toast = useToast()
 
@@ -60,6 +62,13 @@ export default function Navbar({ onOpen }) {
                 </Text>
 
                 <HStack spacing={4}>
+                    <IconButton
+                        size="lg"
+                        variant="ghost"
+                        aria-label="Toggle Color Mode"
+                        onClick={toggleColorMode}
+                        icon={colorMode === 'light' ? <FiMoon /> : <FiSun />}
+                    />
                     <IconButton
                         size="lg"
                         variant="ghost"
